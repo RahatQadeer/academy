@@ -1,0 +1,421 @@
+/*
+ * Brent direction — Airtable restraint + dashboard pastels, black CTAs,
+ * plum accent, Asana-like sections, centered gigantism-scale hero type.
+ */
+
+.notion-doc--brent[data-theme="notion"] {
+  --accent-plum: #6d597a;
+  --accent-plum-deep: #4a3d52;
+  --accent-plum-soft: #ebe4f0;
+  --accent-plum-line: rgba(109, 89, 122, 0.35);
+  --accent-blue: #3b82f6;
+  --accent-blue-deep: #1e40af;
+  --accent-blue-soft: #dbeafe;
+  --accent-teal: #0d9488;
+  --accent-bronze: #b45309;
+  --accent-bronze-soft: #fef3c7;
+
+  --pa-ink: #141414;
+  --pa-ink-secondary: #2a2a2a;
+  --pa-paper: #fafafa;
+  --pa-muted: #5c5c62;
+  --pa-line: rgba(20, 20, 20, 0.1);
+  --pa-panel: #f3f3f4;
+  --pa-blue: #141414;
+  --pa-blue-dark: #000000;
+  --pa-deep: #141414;
+  --pa-tint: #ebe4f0;
+  --pa-soft: #f5f5f7;
+  --brent-cta: #141414;
+  --brent-cta-hover: #000000;
+}
+
+.notion-doc--brent {
+  font-family: var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* —— Nav: full-width flat bar, black primary —— */
+
+.notion-doc--brent [data-theme="notion"] .site-nav-bar .bg-pa-ink,
+.site-nav-header[data-theme="notion"] .site-nav-bar .bg-pa-ink {
+  background: var(--brent-cta) !important;
+}
+
+.notion-doc--brent [data-theme="notion"] .site-nav-bar .bg-pa-ink:hover {
+  background: var(--brent-cta-hover) !important;
+}
+
+.notion-doc--brent [data-theme="notion"] .ask-whitby-nav:hover {
+  background: var(--accent-plum-soft);
+  border-color: var(--accent-plum-line);
+  color: var(--accent-plum-deep);
+}
+
+/* —— Sections (Asana rhythm + visible labels) —— */
+
+.notion-doc--brent .notion-section {
+  padding: clamp(3.25rem, 7vw, 5rem) 0;
+}
+
+.notion-doc--brent .notion-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pa-muted);
+  margin-bottom: 0.65rem;
+}
+
+.notion-doc--brent .notion-h2 {
+  font-size: clamp(1.85rem, 3.5vw, 2.65rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+  max-width: 22ch;
+}
+
+.notion-doc--brent .notion-lede {
+  font-size: clamp(1rem, 1.35vw, 1.125rem);
+  line-height: 1.6;
+  color: var(--pa-muted);
+  max-width: 42rem;
+}
+
+.notion-doc--brent .notion-btn--primary {
+  background: var(--brent-cta);
+  color: #ffffff;
+  border-radius: 8px;
+}
+
+.notion-doc--brent .notion-btn--primary:hover {
+  background: var(--brent-cta-hover);
+}
+
+.notion-doc--brent .notion-btn--secondary {
+  border-radius: 8px;
+}
+
+.notion-doc--brent .notion-btn--secondary:hover {
+  border-color: rgba(20, 20, 20, 0.2);
+  background: var(--pa-panel);
+}
+
+/* Bento — Airtable-style pastel tiles, plum on Whitby feature only */
+
+.notion-doc--brent .notion-bento-card[data-module="whitby"] {
+  --card-bg: #ebe4f0;
+  --card-bg-hover: #e0d6e8;
+  --card-accent: var(--accent-plum);
+  --card-accent-deep: var(--accent-plum-deep);
+}
+
+.notion-doc--brent .notion-bento-card[data-module="portal"] {
+  --card-bg: #dbeafe;
+  --card-bg-hover: #c9ddfc;
+  --card-accent: #2563eb;
+  --card-accent-deep: #1e40af;
+}
+
+.notion-doc--brent .notion-bento-card[data-module="academy"] {
+  --card-bg: #fef3c7;
+  --card-bg-hover: #fde68a;
+  --card-accent: #b45309;
+  --card-accent-deep: #92400e;
+}
+
+.notion-doc--brent .notion-bento-card[data-module="partner"] {
+  --card-bg: #d1fae5;
+  --card-bg-hover: #a7f3d0;
+  --card-accent: #059669;
+  --card-accent-deep: #047857;
+}
+
+.notion-doc--brent .notion-block--live:hover {
+  box-shadow:
+    rgba(15, 15, 15, 0.06) 0 0 0 1px,
+    rgba(15, 15, 15, 0.08) 0 10px 28px;
+}
+
+/* Dark band — coordination principles */
+
+.notion-doc--brent .notion-photo-band {
+  border-radius: 16px;
+}
+
+.notion-doc--brent .notion-photo-band__media::after {
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, #141414 42%, transparent) 0%,
+      color-mix(in srgb, #141414 82%, transparent) 100%
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--accent-plum-deep) 45%, transparent) 0%,
+      color-mix(in srgb, #141414 35%, transparent) 100%
+    );
+}
+
+.notion-doc--brent .notion-photo-band__media .section-photo {
+  background: #141414;
+}
+
+/* —— Centered hero (route-travelers structure, gigantism scale) —— */
+
+.trip-hero--brent {
+  padding: clamp(2rem, 5vw, 3.5rem) clamp(1rem, 4vw, 2rem) clamp(3rem, 6vw, 4.5rem);
+  background: var(--pa-paper);
+  text-align: center;
+}
+
+.trip-hero--brent .trip-identity {
+  opacity: 0.35;
+  mask-image: radial-gradient(ellipse 70% 55% at 50% 35%, #000 0%, transparent 100%);
+}
+
+.trip-hero--brent .trip-route-stack {
+  opacity: 0.25;
+}
+
+.trip-hero--brent .trip-wash {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent-plum) 6%, transparent) 0%,
+    transparent 55%
+  );
+}
+
+.trip-hero--brent .trip-stage {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.trip-hero--brent .trip-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.trip-hero--brent .trip-brent-headline {
+  margin: 0 0 1rem;
+  max-width: 16ch;
+  font-size: clamp(2.75rem, 7.5vw, 4.25rem);
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+  color: var(--pa-ink);
+}
+
+.trip-hero--brent .trip-brent-sub {
+  margin: 0 auto 2rem;
+  max-width: 40rem;
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  line-height: 1.45;
+  color: var(--pa-muted);
+}
+
+@media (min-width: 1100px) {
+  .trip-hero--brent .trip-brent-sub {
+    max-width: none;
+    white-space: nowrap;
+  }
+}
+
+.trip-hero--brent .trip-brent-prompt {
+  margin: 0 0 0.85rem;
+  width: 100%;
+  max-width: 720px;
+  text-align: left;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--pa-ink);
+}
+
+.trip-hero--brent .trip-composer-wrap {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.trip-hero--brent .trip-panel {
+  border-radius: 16px;
+  text-align: left;
+}
+
+.trip-hero--brent .trip-panel-search {
+  padding: 1rem;
+}
+
+.trip-hero--brent .trip-pill {
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+  border-radius: 14px;
+}
+
+.trip-hero--brent .trip-input {
+  font-size: 16px;
+  padding: 0.65rem 0.35rem;
+}
+
+.trip-hero--brent .trip-btn--primary {
+  background: var(--brent-cta);
+  color: #fff;
+}
+
+.trip-hero--brent .trip-btn--primary:hover {
+  background: var(--brent-cta-hover);
+}
+
+.trip-hero--brent .trip-pill--focused {
+  border-color: var(--accent-plum);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-plum) 18%, transparent);
+}
+
+.trip-hero--brent .trip-panel-body {
+  padding: 1rem 1rem 1.25rem;
+  background: #fafafa;
+}
+
+.trip-hero--brent .trip-interests {
+  grid-template-columns: 1fr;
+  gap: 0.65rem;
+}
+
+@media (min-width: 640px) {
+  .trip-hero--brent .trip-interests {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .trip-hero--brent .trip-interests {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.trip-hero--brent .trip-interest {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(20, 20, 20, 0.08);
+  background: var(--trip-accent-bg, #ffffff);
+  box-shadow: none;
+}
+
+.trip-hero--brent .trip-interest:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px -12px rgba(20, 20, 20, 0.18);
+  border-color: rgba(20, 20, 20, 0.12);
+}
+
+.trip-hero--brent .trip-interest-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #ffffff;
+  color: var(--trip-accent-ink, var(--pa-ink));
+  box-shadow: 0 0 0 1px rgba(20, 20, 20, 0.06);
+}
+
+.trip-hero--brent .trip-interest:hover .trip-interest-icon {
+  transform: none;
+  background: #ffffff;
+  color: var(--trip-accent-ink, var(--pa-ink));
+}
+
+.trip-hero--brent .trip-interest-head {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
+}
+
+.trip-hero--brent .trip-interest-title {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.trip-hero--brent .trip-interest-eyebrow {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--pa-muted);
+  line-height: 1.35;
+}
+
+.trip-hero--brent .trip-interest-example {
+  display: none;
+}
+
+.trip-hero--brent .trip-interest-arrow {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  opacity: 0;
+}
+
+.trip-hero--brent .trip-interest {
+  position: relative;
+}
+
+.trip-hero--brent .trip-interest:hover .trip-interest-arrow {
+  opacity: 0.6;
+  transform: none;
+  color: var(--trip-accent-ink, var(--pa-ink));
+}
+
+.trip-hero--brent .trip-interest--sky {
+  --trip-accent-bg: #eef4ff;
+  --trip-accent-ink: #1e40af;
+}
+
+.trip-hero--brent .trip-interest--rose {
+  --trip-accent-bg: #fdf2f8;
+  --trip-accent-ink: #9d174d;
+}
+
+.trip-hero--brent .trip-interest--sage {
+  --trip-accent-bg: #ecfdf5;
+  --trip-accent-ink: #047857;
+}
+
+.trip-hero--brent .trip-interest--plum {
+  --trip-accent-bg: #f3eef6;
+  --trip-accent-ink: #6d597a;
+}
+
+.trip-hero--brent .trip-panel-foot {
+  display: none;
+}
+
+.notion-doc--brent .notion-hero-band {
+  background: var(--pa-paper);
+}
+
+.notion-doc--brent .notion-hero-band .notion-section--flush {
+  margin-top: 0;
+  padding-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+.notion-doc--brent .cta-panel {
+  background: linear-gradient(135deg, #141414 0%, #1a1520 55%, #141414 100%);
+}
+
+.notion-doc--brent .cta-title-accent {
+  color: color-mix(in srgb, var(--accent-plum-soft) 90%, #ffffff);
+}
+
+.notion-doc--brent .cta-btn--primary {
+  color: #141414;
+}
+
+.notion-doc--brent [data-theme="notion"] .whitby-word--static {
+  color: var(--accent-plum-deep);
+  text-decoration-color: var(--accent-plum-line);
+}

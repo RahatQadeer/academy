@@ -1,0 +1,54 @@
+-- The areas a client had in mind when they asked for someone to be added.
+--
+-- `client_portal_access_requests` records who, what relationship, which role
+-- and why. It does not record *what they should be able to reach*, which is the
+-- one thing screen 2.1.2.1 asks the professional to decide — so the request
+-- arrives with the four checkboxes blank and the professional guesses at
+-- something the client already knew.
+--
+-- One column on a table this module owns. Nothing else is touched: `permissions`
+-- on `whitbyos_client_members` stays the record of what was actually granted,
+-- and this is only the ask. The two are deliberately not the same column,
+-- because the professional narrowing a request is a real and recordable act —
+-- it is why `client_portal_access_status` has had `approved_edited` since it was
+-- written (§4.9.1), and folding the ask into the grant would erase the
+-- difference it exists to draw.
+--
+-- jsonb rather than text[] to match `whitbyos_client_members.permissions`, which
+-- is jsonb for the reason 025 gives: §13.14.13 describes presets rather than a
+-- fixed set of switches, and §13.14.15 grants a single Request on its own.
+-- Neither survives a fixed column shape, and the two sides of one decision
+-- should not be stored in two different shapes.
+--
+-- Default `'[]'` rather than null, so "they asked for nothing" and "this row
+-- predates the column" are the same answer to a reader — which they are. The
+-- portal reads it through `readRequestedAreas` in `lib/data/people.ts`, which
+-- keeps only keys it recognises, so a value written by anything else cannot put
+-- an unrenderable area in front of the professional.
+
+alter table public.client_portal_access_requests
+  add column if not exists requested_areas jsonb not null default '[]'::jsonb;
+
+-- ---------------------------------------------------------------------------
+-- The insert policy is unchanged and does not need to be
+--
+-- `client_portal_access_requests_insert_client` (001) pins `client_id`,
+-- `requested_by_contact_id` and `status = 'pending'`. A new column on the same
+-- row is covered by the same WITH CHECK — a client writing areas is writing a
+-- row they were already permitted to write, and the column grants nothing on
+-- its own. It is read by the professional, who decides.
+--
+-- The portal filters the value against its own area list before writing, so
+-- this is defence in depth rather than the only guard.
+-- ---------------------------------------------------------------------------
+
+-- ---------------------------------------------------------------------------
+-- Verification
+--
+--   select column_name, data_type, column_default
+--   from information_schema.columns
+--   where table_name = 'client_portal_access_requests'
+--     and column_name = 'requested_areas';
+--
+-- Expected: one row, jsonb, '[]'::jsonb.
+-- ---------------------------------------------------------------------------

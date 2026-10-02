@@ -1,0 +1,29 @@
+<!--
+  The sign-up confirmation email, for every Private Attaché product.
+
+  The link is {{ .RedirectTo }} — the `emailRedirectTo` the signup route and the
+  check-email Resend button both pass — with the sign-up token hash on it. Every
+  one of those addresses already carries a ?next=, which is why the token is
+  appended with & and why the person lands where their product wanted them:
+  /confirmed, /academy, /partner-center/confirmed or /switcher.
+
+  Deliberately not ConfirmationURL, for the same reason as recovery.html.
+  signUp() runs on the @supabase/ssr server client, which is hardcoded to the
+  PKCE flow, so that address carries a pkce_ token whose other half sits in a
+  cookie on the machine that signed up. Confirm from the phone the mail was
+  read on and exchangeCodeForSession has nothing to pair the code with: "both
+  auth code and code verifier should be non-empty". A token hash is verified by
+  verifyOtp, which wants no cookie.
+
+  Invite and magic-link mail is left on ConfirmationURL on purpose — both are
+  sent through a plain @supabase/supabase-js client, which defaults to the
+  implicit flow and stores no verifier, so those links already open anywhere.
+
+  This template lives here so it can be reviewed and versioned; the copy that is
+  actually sent is held in the project's auth config and is applied from this
+  file. Change one, apply the other.
+-->
+<h2>Confirm your email address</h2>
+
+<p>Follow the link below to confirm this email address and finish signing up.</p>
+<p><a href="{{ .RedirectTo }}&token_hash={{ .TokenHash }}&type=signup">Confirm email address</a></p>

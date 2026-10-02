@@ -1,0 +1,21 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs",
+  "buildCommand": "next build",
+  "regions": ["hnd1"],
+  "git": {
+    "deploymentEnabled": {
+      "client-portal": false,
+      "zara/partner-center": false
+    }
+  },
+  "crons": [
+    { "path": "/api/cron/gmail-sync", "schedule": "0 6 * * *" },
+    { "path": "/api/cron/client-portal-integrations", "schedule": "30 6 * * *" },
+    { "path": "/api/cron/partner-earnings-promote", "schedule": "0 7 * * *" },
+    {
+      "path": "/api/academy/credential-renewal-reminders",
+      "schedule": "0 14 * * *"
+    }
+  ]
+}

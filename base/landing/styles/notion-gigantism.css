@@ -1,0 +1,382 @@
+/*
+ * Gigantism layout — inspired by AgentAI Webflow Home V1:
+ * oversized type, airy sections, rounded hero shell, split hero + product panel.
+ */
+
+.notion-doc--gigantism {
+  font-family: var(--font-inter-tight), ui-sans-serif, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+}
+
+/* —— Section typography —— */
+
+.notion-doc--gigantism .notion-section {
+  padding: clamp(3.5rem, 8vw, 5.5rem) 0;
+  border-top-color: rgba(19, 21, 30, 0.08);
+}
+
+.notion-doc--gigantism .notion-page,
+.notion-doc--gigantism .notion-page--wide {
+  max-width: 1200px;
+  padding-left: clamp(1.25rem, 4vw, 2rem);
+  padding-right: clamp(1.25rem, 4vw, 2rem);
+}
+
+.notion-doc--gigantism .notion-heading {
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.notion-doc--gigantism .notion-label {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.75rem;
+}
+
+.notion-doc--gigantism .notion-h2 {
+  font-size: clamp(2.25rem, 4.8vw, 3.5rem);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  max-width: 18ch;
+}
+
+.notion-doc--gigantism .notion-lede {
+  margin-top: 1rem;
+  max-width: 40rem;
+  font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+  line-height: 1.65;
+  color: var(--pa-muted);
+}
+
+.notion-doc--gigantism .notion-btn,
+.notion-doc--gigantism .notion-btn--primary,
+.notion-doc--gigantism .notion-btn--secondary {
+  border-radius: 999px;
+  padding: 0.65rem 1.35rem;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.notion-doc--gigantism .notion-bento-title {
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.notion-doc--gigantism .notion-bento-card {
+  border-radius: 20px;
+  padding: 1.75rem;
+}
+
+.notion-doc--gigantism .notion-bento-card--feature {
+  min-height: 380px;
+  padding: clamp(1.75rem, 3vw, 2.75rem);
+}
+
+.notion-doc--gigantism .notion-bento-card--feature .notion-bento-title {
+  font-size: clamp(1.5rem, 2.8vw, 2rem);
+}
+
+.notion-doc--gigantism .notion-hero-band {
+  padding-bottom: 0;
+  background: var(--pa-paper);
+}
+
+.notion-doc--gigantism .notion-hero-band .notion-section--flush {
+  margin-top: 0;
+  padding-top: clamp(2.5rem, 6vw, 4rem);
+}
+
+/* —— Hero shell (Home V1 card) —— */
+
+.trip-hero--gigantism {
+  padding: clamp(1rem, 3vw, 1.75rem) clamp(0.75rem, 2vw, 1.25rem) 0;
+  background: transparent;
+}
+
+.trip-hero--gigantism::after {
+  display: none;
+}
+
+.trip-hero--gigantism .trip-stage {
+  position: relative;
+  z-index: 2;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0;
+  border-radius: 28px;
+  background: #ffffff;
+  border: 1px solid rgba(19, 21, 30, 0.08);
+  box-shadow:
+    0 24px 64px -32px rgba(19, 21, 30, 0.18),
+    0 1px 0 rgba(255, 255, 255, 0.8) inset;
+  overflow: hidden;
+}
+
+.trip-hero--gigantism .trip-stage-nav {
+  position: relative;
+  z-index: 4;
+  border-bottom: 1px solid rgba(19, 21, 30, 0.06);
+  overflow: visible;
+}
+
+.trip-hero--gigantism .trip-stage:has(.site-nav-dropdown),
+.trip-hero--gigantism .trip-stage:has(.nav-mobile-panel) {
+  overflow: visible;
+}
+
+.trip-hero--gigantism .trip-stage-body {
+  padding: clamp(1.75rem, 4vw, 3rem) clamp(1.25rem, 4vw, 2.75rem)
+    clamp(2rem, 5vw, 3.25rem);
+}
+
+.site-nav-header--inset .site-nav-bar {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+.site-nav-header--inset .site-nav-bar::after {
+  display: none;
+}
+
+.site-nav-header--inset .site-nav-bar > div {
+  max-width: none;
+  padding-left: clamp(0.5rem, 2vw, 1rem);
+  padding-right: clamp(0.5rem, 2vw, 1rem);
+}
+
+.site-nav-header--inset .site-nav-dropdown,
+.site-nav-header--flat .site-nav-dropdown {
+  background: #ffffff;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  box-shadow:
+    0 12px 40px rgba(19, 21, 30, 0.1),
+    0 0 0 1px rgba(19, 21, 30, 0.06);
+  border-bottom: none;
+  border-radius: 0 0 12px 12px;
+}
+
+.site-nav-header--inset .site-nav-dropdown::after,
+.site-nav-header--flat .site-nav-dropdown::after {
+  display: none;
+}
+
+.site-nav-header--flat:not(.site-nav-header--inset) .site-nav-bar {
+  background: #ffffff;
+  border-bottom: 1px solid var(--notion-border);
+}
+
+.trip-hero--gigantism .trip-identity {
+  border-radius: 28px;
+}
+
+.trip-hero--gigantism .trip-grid {
+  opacity: 0.55;
+  mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, #000 0%, transparent 100%);
+}
+
+.trip-hero--gigantism .trip-route-stack {
+  opacity: 0.45;
+  transform: translate(-50%, -48%);
+}
+
+.trip-hero--gigantism .trip-content {
+  position: relative;
+  z-index: 2;
+  max-width: none;
+  margin: 0;
+  text-align: left;
+}
+
+@media (min-width: 1024px) {
+  .trip-hero--gigantism .trip-content {
+    display: grid;
+    grid-template-columns: minmax(0, 0.92fr) minmax(320px, 1.08fr);
+    column-gap: clamp(2rem, 4vw, 3.5rem);
+    row-gap: 1.25rem;
+    align-items: center;
+  }
+
+  .trip-hero--gigantism .trip-giant-copy {
+    grid-column: 1;
+  }
+
+  .trip-hero--gigantism .trip-giant-visual {
+    grid-column: 2;
+    grid-row: 1 / span 6;
+    align-self: center;
+  }
+}
+
+.trip-giant-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  padding: 0.35rem 0.85rem 0.35rem 0.35rem;
+  border-radius: 999px;
+  border: 1px solid var(--pa-line);
+  background: rgba(255, 255, 255, 0.85);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--pa-ink);
+}
+
+.trip-giant-badge__tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: var(--pa-ink);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.trip-hero--gigantism .trip-title {
+  margin-bottom: 1.25rem;
+  font-size: clamp(2.75rem, 6.8vw, 4.75rem);
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+  text-align: left;
+}
+
+.trip-hero--gigantism .trip-title-line {
+  display: block;
+}
+
+.trip-hero--gigantism .trip-lede {
+  margin: 0 0 1.75rem;
+  max-width: 34rem;
+  font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+  line-height: 1.65;
+  text-align: left;
+}
+
+.trip-hero--gigantism .trip-composer-wrap {
+  max-width: none;
+  margin: 0;
+}
+
+.trip-hero--gigantism .trip-panel {
+  border-radius: 20px;
+  box-shadow:
+    rgba(15, 15, 15, 0.06) 0px 0px 0px 1px,
+    rgba(15, 15, 15, 0.1) 0px 28px 70px -20px;
+  container-type: inline-size;
+}
+
+.trip-hero--gigantism .trip-btn {
+  border-radius: 999px;
+}
+
+/* Search pill: stacked in split column; one row when the panel is wide enough */
+@media (min-width: 1024px) {
+  .trip-hero--gigantism .trip-pill {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    align-items: center;
+    gap: 0.55rem 0.65rem;
+    padding: 0.65rem 0.75rem;
+    border-radius: 16px;
+    flex-wrap: unset;
+  }
+
+  .trip-hero--gigantism .trip-pill-icon {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .trip-hero--gigantism .trip-input {
+    grid-column: 2;
+    grid-row: 1;
+    width: 100%;
+    min-width: 0;
+    padding-top: 0.45rem;
+    padding-bottom: 0.45rem;
+    font-size: 15px;
+  }
+
+  .trip-hero--gigantism .trip-pill-actions {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin-left: 0;
+    width: 100%;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+}
+
+@container (min-width: 620px) {
+  .trip-hero--gigantism .trip-pill {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    padding: 0.4rem 0.4rem 0.4rem 0.85rem;
+    border-radius: 999px;
+  }
+
+  .trip-hero--gigantism .trip-pill-actions {
+    margin-left: auto;
+    width: auto;
+    flex-wrap: nowrap;
+  }
+}
+
+.trip-hero--gigantism .trip-interests {
+  grid-template-columns: 1fr;
+}
+
+@container (min-width: 480px) {
+  .trip-hero--gigantism .trip-interests {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.trip-hero--gigantism .trip-interest-head {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.1rem;
+}
+
+.trip-hero--gigantism .trip-interest-example {
+  white-space: normal;
+  line-height: 1.35;
+}
+
+.notion-doc--gigantism .platform-page-intro__title {
+  font-size: clamp(2.25rem, 5vw, 3.25rem);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+}
+
+@media (max-width: 1023px) {
+  .trip-hero--gigantism .trip-title {
+    font-size: clamp(2.35rem, 9vw, 3.25rem);
+    text-align: center;
+  }
+
+  .trip-hero--gigantism .trip-lede,
+  .trip-hero--gigantism .trip-content {
+    text-align: center;
+  }
+
+  .trip-hero--gigantism .trip-lede {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .trip-giant-badge {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

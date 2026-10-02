@@ -1,0 +1,43 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# next
+/.next/
+/out/
+
+# env
+.env
+.env*.local
+!.env.example
+
+# local MCP secrets (Figma token)
+.cursor/mcp.json
+
+# vercel
+.vercel
+
+# supabase local cache (keep migrations)
+.supabase/.temp
+.supabase/.branches
+
+# debug / os
+npm-debug.log*
+.DS_Store
+Thumbs.db
+*.tsbuildinfo
+next-env.d.ts
+
+package-lock.json
+.package-lock.json
+# Supabase CLI local link state (contains project ref and pooler URL)
+supabase/.temp/
+docs/client-portal-state-of-play.md
+# env backups with secrets
+.env.bak*

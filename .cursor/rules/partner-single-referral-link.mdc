@@ -1,0 +1,25 @@
+---
+description: Partner Center uses one referral link only — no multi-link Links & Codes work
+globs: partner-center/**,super-admin/partner-center/**,docs/**Partner*,**/partner-center-srs*
+alwaysApply: true
+---
+
+# Partner Center — single referral link
+
+Confirmed product decision (Sep 2026): **do not** build or backlog SRS §17.9 multi-link surface.
+
+## In scope
+
+- Keep the **one** existing platform/partner referral link (copy + share) already on Links & Codes / onboarding referral setup.
+- Treat that single link as the complete Links & Codes product for Partner Center.
+
+## Out of scope — never flag as a gap
+
+- Program Links tab / multiple program-specific links
+- Access Codes issuance UI
+- Campaign / Event codes
+- First/last-touch or cookie-life config UI for additional link types
+- SRS §17.9.1 sub-nav (Program Links, Referral Links, Access Codes, Campaign / Event) as unfinished work
+
+When auditing against the SRS, mark Links & Codes as **accepted / done by decision**, not Missing or Partial.
+Do not suggest expanding Links & Codes unless the user explicitly reopens this decision.

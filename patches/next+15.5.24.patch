@@ -1,0 +1,44 @@
+diff --git a/node_modules/next/dist/client/components/app-router.js b/node_modules/next/dist/client/components/app-router.js
+index 6506e0b..12fc5bb 100644
+--- a/node_modules/next/dist/client/components/app-router.js
++++ b/node_modules/next/dist/client/components/app-router.js
+@@ -173,6 +173,17 @@ function Head(param) {
+  */ function Router(param) {
+     let { actionQueue, assetPrefix, globalError } = param;
+     const state = (0, _useactionqueue.useActionQueue)(actionQueue);
++    // Keep useActionQueue in its own component. If it suspends, a later render
++    // must not continue into useMemo in the same function — that is React's
++    // "Rendered more hooks than during the previous render" crash.
++    return /*#__PURE__*/ (0, _jsxruntime.jsx)(RouterContent, {
++        state: state,
++        assetPrefix: assetPrefix,
++        globalError: globalError
++    });
++}
++function RouterContent(param) {
++    let { state, assetPrefix, globalError } = param;
+     const { canonicalUrl } = state;
+     // Add memoized pathname/query for useSearchParams and usePathname.
+     const { searchParams, pathname } = (0, _react.useMemo)(()=>{
+diff --git a/node_modules/next/dist/esm/client/components/app-router.js b/node_modules/next/dist/esm/client/components/app-router.js
+index 8ce143c..a13421b 100644
+--- a/node_modules/next/dist/esm/client/components/app-router.js
++++ b/node_modules/next/dist/esm/client/components/app-router.js
+@@ -147,6 +147,17 @@ function Head(param) {
+  */ function Router(param) {
+     let { actionQueue, assetPrefix, globalError } = param;
+     const state = useActionQueue(actionQueue);
++    // Keep useActionQueue in its own component. If it suspends, a later render
++    // must not continue into useMemo in the same function — that is React's
++    // "Rendered more hooks than during the previous render" crash.
++    return /*#__PURE__*/ _jsx(RouterContent, {
++        state: state,
++        assetPrefix: assetPrefix,
++        globalError: globalError
++    });
++}
++function RouterContent(param) {
++    let { state, assetPrefix, globalError } = param;
+     const { canonicalUrl } = state;
+     // Add memoized pathname/query for useSearchParams and usePathname.
+     const { searchParams, pathname } = useMemo(()=>{

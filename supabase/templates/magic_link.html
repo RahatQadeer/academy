@@ -1,0 +1,32 @@
+<h2>
+  {{ if eq .Data.invite_type "instructor" }}
+    You're now an Academy Instructor
+  {{ else }}
+    Magic Link
+  {{ end }}
+</h2>
+
+{{ if eq .Data.invite_type "instructor" }}
+  <p>Hi {{ if .Data.full_name }}{{ .Data.full_name }}{{ else }}there{{ end }},</p>
+  <p>
+    Your Private Attaché account now has <strong>Instructor</strong> access for Academy.
+  </p>
+  <p><strong>Email:</strong> {{ .Email }}</p>
+  <p><strong>Role:</strong> Academy Instructor</p>
+  {{ if .Data.programs }}
+    <p><strong>Assigned programs:</strong> {{ .Data.programs }}</p>
+  {{ end }}
+  <p>Follow this link to open your instructor workspace:</p>
+{{ else }}
+  <p>Follow this link to login:</p>
+{{ end }}
+
+<p>
+  <a href="{{ .ConfirmationURL }}">
+    {{ if eq .Data.invite_type "instructor" }}
+      Open Instructor workspace
+    {{ else }}
+      Log In
+    {{ end }}
+  </a>
+</p>

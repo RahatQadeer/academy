@@ -1,0 +1,24 @@
+-- What the firm suggests, for the half of a client's list it can draft.
+--
+-- The client-facing list has always been one kind of thing: a label and an
+-- empty box. Two kinds live in it. A passport can only come from the client,
+-- and a blank box is exactly the right question. A wedding menu, a shortlist,
+-- a running order is theirs to decide and ours to draft, and a blank box for
+-- one of those is the firm handing its own work to the person paying for it.
+--
+-- Migration 101's `proposable` on each requirement marks the second kind (it
+-- lives inside the existing `required_inputs` jsonb, so no column for it).
+-- This holds what was actually suggested: { "<need slug>": "<the text>" }.
+--
+-- On the plan rather than on the task, because the ask is a plan-level thing.
+-- One need is reached from several tasks and asked for once, so a proposal
+-- kept per task would be the same suggestion written two or three times, free
+-- to disagree with itself. `client_ask_extra` and `client_ask_skip` are the
+-- professional's own edits to the same list and sit here for the same reason.
+--
+-- Deliberately not sent anywhere by writing it. SRS 12.1.5 keeps every
+-- external send behind a person: the suggestion is drafted here, read on the
+-- firm's own screen, and reaches the client only through the same button that
+-- has always sent the ask.
+alter table public.whitbyos_workplans
+  add column if not exists client_ask_proposals jsonb;

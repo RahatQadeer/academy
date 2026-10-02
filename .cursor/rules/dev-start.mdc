@@ -1,0 +1,135 @@
+---
+description: Where to start — own branch, reuse auth, product onboarding, no DB changes
+alwaysApply: true
+---
+
+# Private Attaché — start here
+
+One Next.js app. One Vercel. One Supabase. Four products behind shared auth and a switcher.
+
+**Private Attaché** = app shell / brand. **Whitby** = professional product. Never label a screen "Whitby OS".
+
+## Read these first
+
+Do not start coding until you have read:
+
+- `docs/Private-Attache-Ecosystem-SRS-v3.md` — requirements (auth §3, onboarding §4, then your module)
+- `docs/DB-Schema.md` — tables and fields. Yours already exist.
+- `docs/design-system.md` — visual rules
+- `base/cursor.md` plus **your** `<product>/cursor.md`
+
+## Git — your own branch
+
+```bash
+git checkout base
+git checkout -b <name>/<module>
+```
+
+`sabahat/whitbyos` · `rohail/client-portal` · `rahat/academy-lms` · `zara/partner-center`
+
+Stay in your folder. Do not edit another person's folder or `/base` without coordinating. Open a PR against `base`, not `main`.
+
+## Database — first check, no schema changes
+
+Do **not** add/rename/drop tables or columns as your first move. The field or table you need is almost certainly already in `docs/DB-Schema.md` (and in `/supabase/migrations`). Query and use it.
+
+If it is genuinely missing, **ask Laiba** before writing a migration. Shared identity/contact/company/document columns are never duplicated locally.
+
+| Person | Folder | Tables |
+|---|---|---|
+| Laiba | `/base` | `users`, `workspaces`, `workspace_members`, `entitlements`, `invitations`, `contacts`, `contact_roles`, `companies`, `company_contacts`, `documents`, `document_labels`, `audit_log`, `taxonomy_*` |
+| Sabahat | `/whitbyos` | `whitbyos_*` |
+| Rohail | `/client-portal` | `client_portal_access_requests`, `client_portal_notification_prefs` only. Everything else is `whitbyos_*` through permissions. Never create `client_portal_requests` or `client_portal_documents`. |
+| Rahat | `/academy` | `academy_*` |
+| Zara | `/partner-center` | `partner_*` |
+
+## First work after the switcher: your auth + your onboarding
+
+Shared login, signup, Google, forgot/reset, invite, and `/switcher` already work. **Reuse them. Do not fork auth.**
+
+Two entry paths from the landing (`app/page.tsx`):
+
+| Entry | What happens |
+|---|---|
+| **Get Started** / **Sign in** | Generic Private Attaché auth (`/signup`, `/login`) → `/switcher` (or straight into the one entitled product). Laiba owns this path. |
+| **Click a product card** on the landing, or arrive from a **product link** (`/whitbyos`, `/client-portal`, `/academy`, `/partner-center`, invite, referral) | **Your** branded auth, then **your** onboarding, then your product. This is what each of you builds first. |
+
+Reuse the existing screens with query params — do not copy `LoginForm` / `SignupForm`:
+
+```
+/login?brand=portal&next=/client-portal
+/signup?brand=partner&next=/partner-center
+```
+
+`app/login/page.tsx` already brands `partner` and `portal`. Extend that pattern (eyebrow + `next`). Same forms, same `/auth/*` routes.
+
+Onboarding lives in **your folder** (SRS §4, keep it 3–5 screens). Professional workspace onboarding already exists at `app/onboarding/*` — Sabahat reuse/extend it, do not rebuild it. Portal / Academy / Partner onboarding is not built yet; put it under your product folder, not under `/app`.
+
+## What each folder is
+
+```
+/base                 shared platform — do not put product features here
+  /auth               login/signup/forgot/reset/invite forms — REUSE
+  /identity           session, entitlements, workspace bootstrap
+  /switcher           product catalog + switcher UI
+  /components         design-system library
+  /lib/supabase       browser client, server client, middleware
+  /types              User, Workspace, Entitlement, Contact, Company, Document
+/whitbyos             Sabahat
+/client-portal        Rohail
+/academy              Rahat
+/partner-center       Zara
+/app                  routing glue only — no product UI
+/docs                 SRS, design system, DB schema
+/supabase/migrations  shared schema — do not edit on first pass
+```
+
+Each product folder already has `page.tsx`, `nav.ts`, `cursor.md`, plus empty `components/` and `lib/` for you.
+
+## Components
+
+Import from `@/base/components` and types from `@/base/types`. Already there: `Button`, `Input`, `Toggle`, `Pill`, `Avatar`, `Callout`, `Chip`, `ProgressBar`, `StepRow`, `ModuleCard`, `Sidebar`, `AppShell`, `ProductShell`, `ModulePlaceholder`, `AuthLayout`, `Logo`.
+
+Use those. If you need one that does not exist, **make it** in your product `components/` folder. Only promote to `/base` via Laiba if every product needs it.
+
+## `/app` is glue, not features
+
+| Path | What it is |
+|---|---|
+| `app/page.tsx` | Marketing landing — Get Started vs product cards |
+| `app/login`, `signup`, `forgot-password`, `reset-password`, `check-email`, `confirmed` | Shared auth screens — reuse + `?brand=` / `?next=` |
+| `app/invite/[token]` | Accept invite |
+| `app/onboarding/*` | Professional workspace onboarding (Sabahat) |
+| `app/switcher` | Post-login product picker |
+| `app/auth/*` | Auth API — do not replace |
+| `app/[product]/layout.tsx` | `ProductShell` + that product's `nav.ts` |
+| `app/[product]/[[...slug]]/page.tsx` | Dispatches into your product folder |
+
+Do not add product screens under `app/whitbyos`, `app/client-portal`, etc.
+
+## How to add a real screen
+
+Nav items already exist and currently all land on the same placeholder. Example for `/whitbyos/clients`:
+
+1. Create `whitbyos/clients/page.tsx` in **your** folder.
+2. Wire the slug in `app/[product]/[[...slug]]/page.tsx`:
+
+```tsx
+import WhitbyPage from "@/whitbyos/page";
+import WhitbyClients from "@/whitbyos/clients/page";
+
+const path = (slug ?? []).join("/");
+if (product === "whitbyos" && path === "clients") return <WhitbyClients />;
+if (product === "whitbyos") return <WhitbyPage />;
+```
+
+3. Leave `nav.ts` href as `/whitbyos/clients`.
+
+Same pattern for the others (`client-portal/requests/page.tsx`, `academy/learning/page.tsx`, …).
+
+## Hard rules
+
+- Do not fork identity, contacts, companies, or documents.
+- Client Portal reads `whitbyos_*` through visibility (Internal / Client Visible / Restricted). Schema changes to Requests, Forms, Documents, or Messages must be told to Rohail before they ship.
+- Warm canvas `#f1f1ef`, ink `#37352f`, one accent `#2383e2`. No extra brand colors, no webfonts.
+- Tokens: Whitby blue, portal tan, academy purple, partner green — already on the CSS variables.

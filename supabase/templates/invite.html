@@ -1,0 +1,34 @@
+<h2>
+  {{ if eq .Data.invite_type "instructor" }}
+    You're invited as an Academy Instructor
+  {{ else }}
+    You have been invited
+  {{ end }}
+</h2>
+
+{{ if eq .Data.invite_type "instructor" }}
+  <p>Hi {{ if .Data.full_name }}{{ .Data.full_name }}{{ else }}there{{ end }},</p>
+  <p>
+    You've been invited to <strong>Private Attaché Academy</strong> as an
+    <strong>Instructor</strong>.
+  </p>
+  <p><strong>Email:</strong> {{ .Email }}</p>
+  <p><strong>Role:</strong> Academy Instructor</p>
+  {{ if .Data.programs }}
+    <p><strong>Assigned programs:</strong> {{ .Data.programs }}</p>
+  {{ end }}
+  <p>Use the button below to set your password and open your instructor workspace.</p>
+{{ else }}
+  <p>You have been invited to create a user on {{ .SiteURL }}.</p>
+  <p>Follow this link to accept the invite:</p>
+{{ end }}
+
+<p>
+  <a href="{{ .ConfirmationURL }}">
+    {{ if eq .Data.invite_type "instructor" }}
+      Set password & join as Instructor
+    {{ else }}
+      Accept the invite
+    {{ end }}
+  </a>
+</p>

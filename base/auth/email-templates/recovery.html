@@ -1,0 +1,101 @@
+<!--
+  The password reset email, for every Private Attaché product.
+
+  Written for email clients, not browsers: tables rather than flexbox, every
+  style inline, no <style> block and no web font — Outlook strips or ignores all
+  three. No image either, so nothing depends on a remote host being reachable or
+  on the recipient choosing to load pictures.
+
+  It replaces the stock Supabase template, which was an <h2>, a sentence and a
+  bare <a> — an email that reads as a system notice rather than as something
+  the product sent.
+
+  The link is {{ .RedirectTo }} — the `redirectTo` the forgot-password route
+  passes — with the recovery token hash on it, so the button lands on
+  /auth/callback and on to /reset-password in whichever environment sent it.
+
+  Deliberately not ConfirmationURL. That address goes through Supabase's own
+  /auth/v1/verify carrying a PKCE token, and PKCE keeps half the secret in a
+  cookie on the device that asked for the reset. Open the mail on a second
+  phone and the exchange fails with "both auth code and code verifier should
+  be non-empty". A token hash is verified by verifyOtp instead, which wants no
+  cookie, so the link works wherever the mail is read.
+
+  This template lives here so it can be reviewed and versioned; the copy that is
+  actually sent is held in the project's auth config and is applied from this
+  file. Change one, apply the other.
+-->
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f7f7f5;padding:32px 16px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif">
+  <tr>
+    <td align="center">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:520px;background:#ffffff;border:1px solid #ececea;border-radius:10px">
+
+        <tr>
+          <td style="padding:28px 32px 0">
+            <table cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td style="width:26px;height:26px;background:#37352f;border-radius:7px;text-align:center;vertical-align:middle;color:#ffffff;font-size:10px;font-weight:700;letter-spacing:.02em">PA</td>
+                <td style="padding-left:9px;font-size:14px;font-weight:600;color:#37352f">Private Attaché</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding:26px 32px 0">
+            <div style="font-size:21px;font-weight:700;color:#37352f;letter-spacing:-.3px;line-height:1.3">
+              Choose a new password
+            </div>
+            <div style="padding-top:12px;font-size:14.5px;line-height:1.65;color:rgba(55,53,47,.75)">
+              We received a request to reset the password for this address.
+              Use the button below to set a new one.
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding:24px 32px 0">
+            <table cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td style="background:#2383e2;border-radius:6px">
+                  <a href="{{ .RedirectTo }}&token_hash={{ .TokenHash }}&type=recovery"
+                     style="display:inline-block;padding:11px 22px;font-size:14px;font-weight:500;color:#ffffff;text-decoration:none">
+                    Reset your password
+                  </a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding:22px 32px 0">
+            <div style="font-size:12.5px;line-height:1.6;color:rgba(55,53,47,.5)">
+              If the button doesn't work, copy this into your browser:
+            </div>
+            <!-- Long, and it must not be broken across lines by the client. -->
+            <div style="padding-top:6px;font-size:12px;line-height:1.5;color:#2383e2;word-break:break-all">
+              {{ .RedirectTo }}&token_hash={{ .TokenHash }}&type=recovery
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding:22px 32px 28px">
+            <div style="border-top:1px solid #ececea;padding-top:16px;font-size:12px;line-height:1.6;color:rgba(55,53,47,.45)">
+              This link expires in one hour and can be used once. If you didn't
+              ask to reset your password, you can ignore this email — nothing
+              changes until the link is used, and your current password still
+              works.
+            </div>
+          </td>
+        </tr>
+
+      </table>
+
+      <div style="padding-top:16px;font-size:11.5px;color:rgba(55,53,47,.4)">
+        Private Attaché™ — a new standard in professional coordination.
+      </div>
+    </td>
+  </tr>
+</table>
